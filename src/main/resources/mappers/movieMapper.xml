@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="spring.mvc.spring_pj_team2.dao.MovieDAO">  <!-- namespace="패키지명.인터페이스" -->
+		
+		<select id="getPopularList" resultType = "spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT *
+			  FROM movie_info
+			 ORDER BY audience desc
+		</select>
+		
+		<select id="getLatestList" resultType = "spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT *
+			  FROM movie_info
+			 ORDER BY releasedate desc
+		</select>
+		
+		<select id="getDomesticList" resultType = "spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT *
+			  FROM movie_info
+			 where country = '국내영화' 
+		</select>
+		
+		<select id="getGlobalList" resultType = "spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT *
+			  FROM movie_info
+			 where country = '국외영화' 
+		</select>
+		
+		<resultMap id="movieMap" type="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			<id property="mvNo" column="mvno"/>
+			<result property="title" column="title"/>
+			<result property="content" column="content"/>
+			<result property="director" column="director"/>
+			<result property="actor" column="actor"/>
+			<result property="genre" column="genre"/>
+			<result property="audience" column="audience"/>
+			<result property="poster" column="poster"/>
+			<result property="grade" column="grade"/>
+			<result property="releaseDate" column="releasedate"/>
+			<result property="country" column="country"/>
+		</resultMap>
+		<!--   영화 검색 쿼리   -->
+		<select id="movieSearch" parameterType="String" resultMap="movieMap">
+			SELECT title, content, director, actor, genre, audience, poster, grade, releaseDate, country FROM movie_info WHERE title LIKE '%' || #{title} || '%' 
+		</select>
+		<select id="movieDetail" parameterType="int" resultType="spring.mvc.spring_pj_team2.dto.MovieDTO"> 
+			select * FROM movie_info where mvno = #{mvNo,jdbcType=NUMERIC} 
+		</select>
+		<insert id="commentInsert" parameterType="spring.mvc.spring_pj_team2.dto.MovieCommentDTO"> 
+			INSERT INTO movie_comment_tbl(comment_num, pass, mvNo, rating, review, regDate) VALUES((SELECT NVL(MAX(comment_num)+1, 1) FROM movie_comment_tbl), #{password,jdbcType=VARCHAR}, #{mvNo,jdbcType=NUMERIC}, #{rating,jdbcType=VARCHAR}, #{review, jdbcType=CLOB}, sysdate) 
+		</insert>
+		<select id="commentList" parameterType="int" resultType="spring.mvc.spring_pj_team2.dto.MovieCommentDTO"> 
+			SELECT * FROM movie_comment_tbl WHERE mvNo = #{mvNo} ORDER BY comment_num DESC 
+		</select>
+		<select id="password_chk" parameterType="java.util.Map" resultType="int"> 
+			SELECT COUNT(*) FROM movie_comment_tbl WHERE comment_num=#{comment_num} AND pass=#{password} 
+		</select>
+		<delete id="commentDelete" parameterType="int"> 
+			DELETE FROM movie_comment_tbl WHERE comment_num=#{comment_num} 
+		</delete>
+	</mapper> 

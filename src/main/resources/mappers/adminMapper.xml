@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="spring.mvc.spring_pj_team2.dao.AdminDAO">  <!-- namespace="패키지명.인터페이스" -->
+		
+		<select id="userListup" resultType="spring.mvc.spring_pj_team2.dto.UserInfoDTO">
+		<![CDATA[	
+			SELECT * 
+			  FROM( 
+				SELECT A.*,
+					   rownum AS rn 
+				  FROM 
+					(SELECT * FROM user_info
+					  ORDER BY userno  DESC
+					) A 
+				) 
+			 WHERE rn >= #{start} 
+			   AND rn <= #{end}
+		]]>
+		</select>
+		
+		<select id="userCnt" resultType="int">
+			SELECT COUNT(*) AS cnt
+			  FROM user_info
+		</select>
+		
+		<select id="movieListup" parameterType="java.util.Map" resultType="spring.mvc.spring_pj_team2.dto.MovieDTO">
+		<![CDATA[	
+			SELECT * 
+			  FROM( 
+				SELECT A.*,
+					   rownum AS rn 
+				  FROM 
+					(SELECT * FROM movie_info
+					  ORDER BY mvno DESC
+					) A 
+				) 
+			 WHERE rn >= #{start} 
+			   AND rn <= #{end}
+		]]>
+		</select>
+		
+		<select id="getMaxMvNo" resultType="int">
+			select max(mvno) from movie_info
+		</select>
+		
+		<select id="login" parameterType="java.util.Map" resultType="int">
+			select COUNT(*) from admin_info
+			where adminid = #{id}
+			and adminpwd = #{pwd}
+		</select>
+		
+		<select id="movieCnt" resultType="int">
+			SELECT COUNT(*) AS cnt
+			  FROM movie_info
+		</select>
+		
+		<select id="boardListUp"  parameterType="java.util.Map" resultType="spring.mvc.spring_pj_team2.dto.BoardDTO">
+		<![CDATA[	
+			SELECT * 
+			  FROM( 
+				SELECT A.*,
+					   rownum AS rn 
+				  FROM 
+					(SELECT * FROM mvc_board_tbl
+					  WHERE  show = 'y'
+					  ORDER BY num DESC
+					) A 
+				) 
+			 WHERE rn >= #{start} 
+			   AND rn <= #{end}
+		]]>
+		</select>
+		
+		<select id="boardCnt" resultType="int">
+			SELECT COUNT(*) AS cnt
+			  FROM mvc_board_tbl
+		</select>
+		
+		<insert id="addMovie" parameterType="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			INSERT INTO movie_info(mvNo, title, content, director, actor, genre, audience, poster, grade, releaseDate, country)
+			 VALUES ((SELECT NVL(MAX(mvNo), 0)+1 FROM movie_info), #{title}, #{content}, #{director}, #{actor}, #{genre}, #{audience}, #{poster}, #{grade}, #{releaseDate}, #{country})
+		</insert>
+		
+		<delete id="deleteMovie" parameterType="int">
+			DELETE movie_info 
+             WHERE mvNo = #{mvNo}
+		</delete>
+		
+		<select id="movieDetail" resultType="spring.mvc.spring_pj_team2.dto.MovieDTO" parameterType="int">
+			SELECT * From movie_info 
+             WHERE mvNo = #{mvNo} 
+		</select>
+		
+		<update id="modifyMovie" parameterType="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			UPDATE movie_info 
+			   SET title = #{title}, 
+			       content = #{content}, 
+			       director = #{director}, 
+			       actor = #{actor}, 
+			       genre = #{genre}, 
+			       audience = #{audience}, 
+			       poster = #{poster}, 
+			       grade = #{grade}, 
+			       releaseDate = #{releaseDate}, 
+			       country = #{country}
+             WHERE mvNo = #{mvNo}
+		</update>
+		
+		<update id="blockUser" parameterType="String">
+			UPDATE user_info 
+               SET show = '0' 
+             WHERE userid = #{userId}
+		</update>
+		
+		<update id="unblockUser" parameterType="String">
+			UPDATE user_info 
+               SET show = '1' 
+             WHERE userid = #{userId}
+		</update>
+		
+		<insert id="messaging" parameterType="spring.mvc.spring_pj_team2.dto.MessageDTO">
+			INSERT INTO user_messagebox
+            VALUES ((SELECT NVL(MAX(messageNo),0)+1 FROM user_messagebox), #{userId}, #{messageTitle}, #{messageContent})
+		</insert>
+		
+		<insert id="addBoard" parameterType="spring.mvc.spring_pj_team2.dto.BoardDTO">
+			INSERT INTO mvc_board_tbl
+            VALUES((SELECT NVL(MAX(num),0)+1 FROM mvc_board_tbl), #{title}, #{content}, #{writer}, 0, sysdate, 0, 'y', 1)
+		</insert>
+		
+		<update id="deleteBoard" parameterType="int">
+			UPDATE mvc_board_tbl 
+               SET show = 'n' 
+             WHERE num = #{num}
+		</update>
+		
+		<select id="getAllVisitors" resultType="spring.mvc.spring_pj_team2.dto.VisitorDTO">
+			SELECT  vdate, visitors1 FROM k_visitor_tbl
+			ORDER BY vdate
+		</select>
+		
+		<select id="getAllVisitors2" resultType="spring.mvc.spring_pj_team2.dto.VisitorDTO">
+			SELECT  vdate, visitors2 FROM f_visitor_tbl
+			ORDER BY vdate
+		</select>
+		
+		
+	</mapper> 

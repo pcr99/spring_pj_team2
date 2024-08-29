@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="spring.mvc.spring_pj_team2.dao.UserInfoDAO">  <!-- namespace="패키지명.인터페이스" -->
+		
+		<insert id="join" parameterType="spring.mvc.spring_pj_team2.dto.UserInfoDTO"> 
+			INSERT INTO user_info(userNo, userid, userpwd, username, birth, hp,  address, email, createDate,show, key) 
+			VALUES((SELECT NVL(MAX(userno),0)+1 FROM user_info),#{userId}, #{userPwd}, #{userName}, #{birth}, #{hp}, #{address}, #{email}, sysdate, 1, #{key}) 
+		</insert>
+		
+		<select id="useridCheck" parameterType="String" resultType="int">
+			SELECT COUNT(*) FROM user_info 
+			WHERE userid=#{userid} 
+		</select>
+		
+		<!--  시큐리티 - 로그인전에 이메일 인증을 한다.  -->
+		<select id="selectKey" parameterType="String" resultType="int">
+		 SELECT COUNT(*) FROM user_info WHERE key=#{key} 
+		 </select>
+		<!--  시큐리티 - enabled를 1로 update  -->
+		<update id="updateGrade" parameterType="String">
+		UPDATE user_info SET enabled = 1 WHERE key=#{key} 
+		</update>
+		 
+		 <select id="selectUser" parameterType="String" resultType="spring.mvc.spring_pj_team2.dto.UserInfoDTO">
+		 SELECT * FROM user_info WHERE userid=#{userId} 
+		 </select>
+		  
+		<!--  시큐리티 - 로그인 성공시  UserLoginSuccessHandler - onAuthenticationSuccess()에서 호출  -->
+		<select id="authorityCheck" parameterType="String" resultType="String">
+		 SELECT authority FROM user_info WHERE userid=#{userId} 
+		 </select>
+		<!--  시큐리티 - 로그인 실패시  UserLoginFailurerHandler - onAuthenticationFailure()에서 호출  -->
+		<select id="userPasswordCheck" parameterType="String" resultType="String">
+		 SELECT userpwd FROM user_info WHERE userid=#{userid} 
+		</select>
+		<select id="usershowCheck" parameterType="String" resultType="int">
+		 SELECT show FROM user_info WHERE userid=#{userid} 
+		</select>
+		<select id="getUserInfoBySessionID" parameterType="String" resultType="spring.mvc.spring_pj_team2.dto.UserInfoDTO">
+			SELECT * FROM user_info WHERE userid LIKE '%'||#{userId}||'%' 
+		</select>
+		<update id="updateMyInfo" parameterType="spring.mvc.spring_pj_team2.dto.UserInfoDTO">
+			UPDATE user_info SET username=#{userName}, email =#{email}, address =#{address}, hp=#{hp}, birth=#{birth} WHERE userid LIKE '%'||#{userId}||'%' 
+		</update>
+		<update id="deleteMyInfo" parameterType="String">
+			UPDATE user_info SET show = 0 WHERE userid=#{userId} 
+		</update>
+		<!--   시큐리티 - enabled를 0로 down   -->
+		<update id="downGrade" parameterType="String">
+			UPDATE user_info SET enabled = 0 WHERE userid=#{userId} 
+		</update>
+		<select id="getPasswordByUserId" parameterType="String" resultType="String">
+			SELECT userpwd FROM user_info WHERE userid=#{userId} 
+		</select>
+		<select id="selectId" parameterType="String" resultType="int">
+			SELECT COUNT(*) FROM user_info WHERE userid=#{userId} 
+		</select>
+		<select id="getMessageList" parameterType="String" resultType="spring.mvc.spring_pj_team2.dto.MessageDTO">
+			SELECT * FROM user_messagebox where userid=#{userId}
+		</select>
+		<select id="getMessageDetail" parameterType="int" resultType="spring.mvc.spring_pj_team2.dto.MessageDTO">
+			SELECT * FROM user_messagebox WHERE messageNo =#{mesNo}
+		</select>
+		
+		<select id="adminPasswordCheck" parameterType="String" resultType="String">
+		 SELECT adminpwd FROM admin_info WHERE adminid=#{adminId} 
+		 </select>
+		 
+		<select id="adminAuthorityCheck" parameterType="String" resultType="String">
+		 SELECT authority FROM admin_info WHERE adminid=#{adminId} 
+		</select>
+		
+		<select id="selectAdmin" parameterType="String" resultType="spring.mvc.spring_pj_team2.dto.AdminDTO">
+		  SELECT * FROM admin_info WHERE adminid=#{adminId} 
+		</select>
+	</mapper> 

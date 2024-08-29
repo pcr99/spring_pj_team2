@@ -1,0 +1,89 @@
+@charset "UTF-8";
+body {
+    background-color: #141414; /* 검정색 배경 */
+    color: #fff; /* 흰색 텍스트 */
+    font-family: Arial, sans-serif; /* 기본 폰트 설정 */
+    margin: 0; /* body의 기본 margin 제거 */
+    padding-top: 30px; /* 헤더의 높이에 맞춰 위 여백 설정 */
+}
+
+.wrap {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    align-items: center; /* 텍스트를 수직으로 가운데 정렬 */
+    justify-content: center; /* 요소들을 가운데로 정렬 */
+    padding: 10px 20px; /* 상하좌우 여백 설정 */
+    background-color: #000; /* 검정색 배경 */
+    width: 100%;
+}
+
+#container {
+    flex: 1; /* 컨텐츠가 헤더와 푸터 사이에서 자동으로 늘어남 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contents {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 800px;
+}
+
+#contents h1 {
+    color: #fff;
+    text-align: center;
+}
+
+.table_div {
+    margin-top: 20px;
+}
+
+.table_div table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table_div th, .table_div td {
+    border: 1px solid #555;
+    padding: 10px;
+    text-align: center;
+}
+
+.input {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.inputButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.inputButton:hover {
+    background-color: #0056b3;
+}

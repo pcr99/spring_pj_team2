@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="spring.mvc.spring_pj_team2.dao.MovieDAO">  <!-- namespace="패키지명.인터페이스" -->
+		
+		<select id="k_mvList" resultType ="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT * FROM movie_info 
+			 WHERE country = '국내영화'
+		</select>
+		
+		<select id="k_horrormvList" resultType ="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT * FROM movie_info 
+			 WHERE genre = '공포' 
+			   AND country = '국내영화' 
+		</select>
+		
+		<select id="k_comedymvList" resultType ="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT * FROM movie_info 
+			 WHERE genre = '코미디' 
+			   AND country = '국내영화' 
+		</select>
+		
+		<select id="k_actionmvList" resultType ="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT * FROM movie_info 
+			 WHERE genre = '액션' 
+			   AND country = '국내영화' 
+		</select>
+		
+		<select id="f_mvList" resultType ="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT * FROM movie_info 
+			 WHERE country = '국외영화'
+		</select>
+		
+		<select id="f_sfmvList" resultType ="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT * FROM movie_info 
+			 WHERE genre = 'SF' 
+			   AND country = '국외영화' 
+		</select>
+		
+		<select id="f_heromvList" resultType ="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT * FROM movie_info 
+			 WHERE genre = '히어로' 
+			   AND country = '국외영화' 
+		</select>
+		
+		<select id="f_actionmvList" resultType ="spring.mvc.spring_pj_team2.dto.MovieDTO">
+			SELECT * FROM movie_info 
+			 WHERE genre = '액션' 
+			   AND country = '국외영화' 
+		</select>
+		
+		<update id="incrementkVisitorCount">
+		    MERGE INTO k_visitor_tbl v
+		    USING (SELECT TRUNC(SYSDATE) AS vdate FROM dual) d
+		    ON (v.vdate = d.vdate)
+		    WHEN MATCHED THEN
+		        UPDATE SET v.visitors1 = v.visitors1 + 1
+		    WHEN NOT MATCHED THEN
+		        INSERT (v.vdate, v.visitors1) VALUES (d.vdate, 1)
+		</update>
+		
+		<update id="incrementfVisitorCount">
+		    MERGE INTO f_visitor_tbl v
+		    USING (SELECT TRUNC(SYSDATE) AS vdate FROM dual) d
+		    ON (v.vdate = d.vdate)
+		    WHEN MATCHED THEN
+		        UPDATE SET v.visitors2 = v.visitors2 + 1
+		    WHEN NOT MATCHED THEN
+		        INSERT (v.vdate, v.visitors2) VALUES (d.vdate, 1)
+		</update>
+		
+		
+		
+	</mapper> 

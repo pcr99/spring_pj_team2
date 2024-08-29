@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+header {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    padding: 10px; /* 더 큰 여백을 위해 패딩을 조정 */
+    background-color: #141414;
+    width: calc(100% - 20px); /* 전체 너비에서 20px을 뺀 크기로 설정 */
+    top: 0;
+    z-index: 1000;
+}
+
+.headerBody {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc; /* 헤더 왼쪽에 2px 두께의 회색 테두리 설정 */
+    border-right: 1px solid #ccc; /* 헤더 오른쪽에 2px 두께의 회색 테두리 설정 */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+
+.logo-image {
+    width: 180px; /* 로고 이미지 크기를 늘림 */
+    height: auto; /* 너비에 따라 높이를 자동으로 조정 */
+    margin-left: 50px; /* 로고와 텍스트 사이의 여백을 추가 */
+}
+
+.nav-content {
+    display: flex;
+    justify-content: flex-end; /* 메뉴를 오른쪽으로 정렬 */
+    padding-right: 50px; /* 오른쪽 여백 추가 */
+}
+
+.nav-content ul { 
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-content a {                  
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;  /* 메뉴 항목의 글꼴 크기를 늘림 */
+}
+
+.nav-content ul li:hover a {
+    background-color: red;
+    border-radius: 8px;
+}
+
+.nav-content form {
+    display: flex;
+    align-items: center;
+}
+
+.nav-content input[type="text"] {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    height: 30px;
+}
+
+.nav-content input[type="submit"] {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    height: 30px;
+}
+
+.nav-content input[type="submit"]:hover {
+    background-color: darkred;
+}

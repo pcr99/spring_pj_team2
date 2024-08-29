@@ -1,0 +1,147 @@
+@charset "UTF-8";
+/* join.css(main.css 복사해서 수정) */
+
+/* 공통 스타일 */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: #fff;
+}
+
+/* 컨테이너 스타일 */
+#container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 섹션 스타일 */
+#section1 {
+    padding: 3px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+#section2 {
+    padding: 20px;
+    border: 1px solid #B1AEB7;
+    border-radius: 8px;
+    background-color: #1f1f1f;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#contents {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    color: grey;
+}
+
+/* 폼 스타일 */
+.join {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.join table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.join th, .join td {
+    text-align: left;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.join th {
+    font-size: 15px;
+    font-weight: bold;
+    width: 120px;
+    text-align: center;
+    padding-right: 10px;
+}
+
+.join td {
+    padding-left: 20px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #B1AEB7;
+    border-radius: 4px;
+    background-color: #2c2c2c;
+    color: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.input:focus {
+    border-color: #66afe9;
+    outline: none;
+}
+
+.inputButton {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 5px;
+}
+
+.inputButton:hover {
+    background-color: #45a049;
+}
+
+/* 특정 입력 필드 스타일 */
+.input-short {
+    width: calc(33.33% - 10px);
+    display: inline-block;
+}
+
+.input-email {
+    width: calc(50% - 10px);
+    display: inline-block;
+}
+
+.join .input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.join select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #B1AEB7;
+    border-radius: 4px;
+    background-color: #2c2c2c;
+    color: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.join .submit-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+#result_id, #result_pwd, #result_repwd, #result_email, #result_name, #result_birth {
+	display: flex;
+	justify-content: flex-end;
+    text-align: center;
+	color : red;
+	font-size : 10px;
+	
+}

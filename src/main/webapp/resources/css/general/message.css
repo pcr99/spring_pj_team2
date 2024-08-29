@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+/* 어두운 테마를 위한 스타일 */
+
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+header {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+    left: -10;
+    margin: 0; /* 여백 제거 */
+    box-sizing: border-box;
+}
+
+.wrap {
+    padding: 200px 20px 60px; /* 헤더와 푸터 높이를 고려한 패딩 */
+    min-height: calc(100vh - 140px); /* 전체 화면 높이에서 헤더와 푸터 높이 제외 */
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    color: #e0e0e0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #333;
+}
+
+th {
+    background-color: #2e2e2e;
+    text-align: center;
+}
+
+td {
+    background-color: #1e1e1e;
+    text-align: center;
+}
+
+td.left {
+    text-align: center;
+}
+
+td.center {
+    text-align: center;
+}
+
+a {
+    color: #76c7c0; /* 링크 색상 */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.post:hover {
+    background-color: #2e2e2e; /* 행에 마우스를 올렸을 때 배경색 변경 */
+}

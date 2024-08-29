@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+/* dark-theme.css */
+
+body {
+    background-color: #121212; /* 어두운 배경색 */
+    color: #e0e0e0; /* 밝은 텍스트 색상 */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header, footer {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+header {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+    left: -10;
+}
+
+#container {
+    padding: 20px;
+    margin-top: 250px; /* 헤더 높이만큼 여백 추가 */
+    margin-bottom: 40px; /* 푸터 높이만큼 여백 추가 */
+}
+
+#section1 {
+    text-align: center;
+}
+
+.message-box {
+    border-radius: 8px;
+    padding: 10px;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    color: #ffffff; /* 제목 색상 */
+}
+
+p {
+    font-size: 18px;
+    color: #e0e0e0; /* 텍스트 색상 */
+}
+
+.inputButton {
+    background-color: #333; /* 버튼 배경색 */
+    color: #ffffff; /* 버튼 텍스트 색상 */
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.inputButton:hover {
+    background-color: #555; /* 버튼 hover 색상 */
+}
